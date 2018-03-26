@@ -8,6 +8,7 @@ import time
 import json
 import unittest
 from models.base_model import BaseModel
+from models.state import State
 from models.engine.file_storage import FileStorage
 
 
@@ -101,3 +102,16 @@ class testFileStorage(unittest.TestCase):
             self.assertTrue(True)
         except:
             self.assertTrue(False)
+
+    def test_delete(self):
+        '''
+            Tests delete function works
+        '''
+        new_state = State()
+        name = "California"
+        key = str(new_state.__class__.__name__ + "." + new_state.id)
+        self.storage.new(new_state)
+        self.storage.save()
+        self.storage.delete(new_state)
+        self.storage.save()
+        self.assertTrue(key not in self.storage._FileStorage__objects)
