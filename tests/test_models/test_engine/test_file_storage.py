@@ -115,3 +115,14 @@ class testFileStorage(unittest.TestCase):
         self.storage.delete(new_state)
         self.storage.save()
         self.assertTrue(key not in self.storage._FileStorage__objects)
+
+    def test_delete_not_in(self):
+        '''
+            Tests delete function works
+        '''
+        new_state = State()
+        name = "California"
+        key = str(new_state.__class__.__name__ + "." + new_state.id)
+        self.storage.delete(new_state)
+        self.storage.save()
+        self.assertTrue(key not in self.storage._FileStorage__objects)
