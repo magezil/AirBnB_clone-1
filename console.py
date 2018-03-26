@@ -38,18 +38,23 @@ class HBNBCommand(cmd.Cmd):
         '''
             Create a new instance of class BaseModel and saves it
             to the JSON file.
+            Usage "Create <Class name> <Param1> <Param2>..."
+            Paramaters are key=value pairs with quotes around strings.
         '''
         if len(args) == 0:
             print("** class name missing **")
             return
         try:
-            args = shlex.split(args)
+            args = args.split()
             new_instance = eval(args[0])()
             new_instance.save()
             print(new_instance.id)
-
+            if len(args) > 1:
+                args[0] = args[0] + " {}".format(new_instance.id)
+                self.validator(args)
         except:
-            print("** class doesn't exist **")
+            raise
+#            print("** class doesn't exist **")
 
     def do_show(self, args):
         '''
@@ -216,6 +221,27 @@ class HBNBCommand(cmd.Cmd):
         except:
             print("*** Unknown syntax:", args[0])
 
+    def validator(self, args):
+        '''
+            Validates data to send to update after initializing a new class
+        '''
+        tempvalues = dict(s.split("=") for s in args[1:])
+        values = {}
+        for k, v in tempvalues.items():
+            if v[0] == '"':
+                values[k] = v.replace("_", " ")
+            elif '.' in v:
+                try:
+                    values[k] = float(v)
+                except:
+                    pass
+            else:
+                try:
+                    values[k] = int(v)
+                except:
+                    pass
+        for k, v in values.items():
+            self.do_update("{} {} {}".format(args[0], k, v))
 
 if __name__ == "__main__":
     '''
