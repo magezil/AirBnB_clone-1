@@ -38,6 +38,8 @@ class HBNBCommand(cmd.Cmd):
         '''
             Create a new instance of class BaseModel and saves it
             to the JSON file.
+            Usage "Create <Class name> <Param1> <Param2>..."
+            Paramaters are key=value pairs with quotes around strings.
         '''
         if len(args) == 0:
             print("** class name missing **")
