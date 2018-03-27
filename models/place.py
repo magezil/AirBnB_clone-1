@@ -5,6 +5,7 @@
 from models.base_model import BaseModel, Base
 from sqlalchemy import Column, String, Integer, Float, ForeignKey
 from sqlalchemy.orm import relationship
+from sqlalchemy.schema import Table
 import os
 
 
@@ -13,8 +14,8 @@ class Place(BaseModel, Base):
         Define the class Place that inherits from BaseModel.
     '''
     __tablename__ = "places"
-    city_id = Column(String(60), nullable=False, ForeignKey('cities.id'))
-    user_id = Column(String(60), nullable=False, ForeignKey('users.id'))
+    city_id = Column(String(60), ForeignKey('cities.id'), nullable=False)
+    user_id = Column(String(60), ForeignKey('users.id'), nullable=False)
     name = Column(String(128), nullable=False)
     description = Column(String(1024))
     number_rooms = Column(Integer, nullable=False, default=0)
@@ -36,9 +37,6 @@ class Place(BaseModel, Base):
         amenities =\
             relationship("Amenity", secondary=place_amenity,
                          viewonly=False, back_populates="place_amenities")
-    else:
-        reviews = self.reviews
-        amenities = self.amenities
 
     @property
     def reviews(self):
