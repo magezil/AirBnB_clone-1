@@ -63,7 +63,8 @@ class DBStorage:
         '''
             Deletes obj from current database session if obj != None
         '''
-        self.__session.delete(obj)
+        if obj:
+            self.__session.delete(obj)
 
     def reload(self):
         '''
