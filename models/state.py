@@ -5,9 +5,10 @@
 
 from models.base_model import BaseModel, Base
 from models.city import City
-from sqlalchemy import Column, Integer, String
+from sqlalchemy import Column, String
 from sqlalchemy.orm import relationship
 import models
+import os
 
 
 class State(BaseModel, Base):
@@ -17,7 +18,7 @@ class State(BaseModel, Base):
     __tablename__ = 'states'
     name = Column(String(128), nullable=False)
 
-    cities = relationship("City", back_populates='state')
+    cities = relationship("City", backref='state')
 
     @property
     def cities(self):
@@ -26,4 +27,4 @@ class State(BaseModel, Base):
         '''
         cities = [v for k,v in models.storage.all().items() if 'City' in k and v.state_id == self.id]
 
-City.state = relationship("State", back_populates='cities')
+#City.state = relationship("State", back_populates='cities')
