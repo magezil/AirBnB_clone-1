@@ -3,6 +3,7 @@
     Define the class City.
 '''
 from models.base_model import BaseModel
+from sqlalchemy.orm import relationship
 
 
 class City(BaseModel):
@@ -11,3 +12,4 @@ class City(BaseModel):
     '''
     state_id = ""
     name = ""
+    places = relationship("Place", backref="cities")
