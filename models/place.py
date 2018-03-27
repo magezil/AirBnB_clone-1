@@ -50,7 +50,7 @@ class Place(BaseModel, Base):
         self.max_guest = 0
         self.price_by_night = 0
         self.latitude = 0.0
-        self.longtitude = 0.0
+        self.longitude = 0.0
 
     @property
     def reviews(self):
