@@ -25,6 +25,7 @@ class State(BaseModel, Base):
             Initialize instance variables
         '''
         self.name = ""
+        super().__init__()
 
     @property
     def cities(self):
