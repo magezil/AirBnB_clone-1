@@ -78,3 +78,4 @@ class BaseModel:
         '''
             Deletes current instance from models.storage using delete method
         '''
+        self.model.delete()
