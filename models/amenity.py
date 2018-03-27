@@ -22,4 +22,4 @@ class Amenity(BaseModel, Base):
         super().__init__()
 
 #    place_amenities = relationship(
- #           "Place", secondary="place_amenity", back_populates="amenities")
+#            "Place", secondary="place_amenity", back_populates="amenities")
