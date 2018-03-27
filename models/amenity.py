@@ -12,6 +12,13 @@ class Amenity(BaseModel, Base):
         Implementation for the Amenities.
     '''
     __tablename__ = "amenities"
-    name = Column(String(128), nullable=False)
+    name = Column(String(128), nullable=False, default="")
+
+    def __init__(self):
+        '''
+            Initializes values of our attributes to correct types
+        '''
+        self.name = ""
+
 #    place_amenities = relationship(
  #           "Place", secondary="place_amenity", back_populates="amenities")

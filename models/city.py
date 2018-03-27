@@ -13,3 +13,10 @@ class City(BaseModel, Base):
     __tablename__ = 'cities'
     name = Column(String(128), nullable=False)
     state_id = Column(String(60), ForeignKey('states.id'))
+
+    def __init__(self):
+        '''
+            Initializes values of our attributes to correct types
+        '''
+        self.name = ""
+        self.state_id = ""

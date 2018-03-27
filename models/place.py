@@ -36,6 +36,22 @@ class Place(BaseModel, Base):
     amenities =\
         relationship("Amenity", secondary=place_amenity,
                      viewonly=False, backref="place_amenities")
+
+    def __init__(self):
+        '''
+            Initializes values of our attributes to correct types
+        '''
+        self.city_id = ""
+        self.user_id = ""
+        self.name = ""
+        self.description = ""
+        self.number_rooms = 0
+        self.number_bathrooms = 0
+        self.max_guest = 0
+        self.price_by_night = 0
+        self.latitude = 0.0
+        self.longtitude = 0.0
+
     @property
     def reviews(self):
         """
