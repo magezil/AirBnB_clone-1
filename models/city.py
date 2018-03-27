@@ -20,3 +20,4 @@ class City(BaseModel, Base):
         '''
         self.name = ""
         self.state_id = ""
+        super().__init__()

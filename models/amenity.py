@@ -19,6 +19,7 @@ class Amenity(BaseModel, Base):
             Initializes values of our attributes to correct types
         '''
         self.name = ""
+        super().__init__()
 
 #    place_amenities = relationship(
  #           "Place", secondary="place_amenity", back_populates="amenities")

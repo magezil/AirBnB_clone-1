@@ -51,6 +51,7 @@ class Place(BaseModel, Base):
         self.price_by_night = 0
         self.latitude = 0.0
         self.longitude = 0.0
+        super().__init__()
 
     @property
     def reviews(self):

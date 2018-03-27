@@ -25,3 +25,4 @@ class Review(BaseModel, Base):
         self.text = ""
         self.place_id = ""
         self.user_id = ""
+        super().__init__()
