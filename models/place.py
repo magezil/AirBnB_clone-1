@@ -32,12 +32,10 @@ class Place(BaseModel, Base):
                                  ForeignKey('amenities.id'), nullable=False))
     amenity_ids = []
 
-    if os.getenv('HBNB_TYPE_STORAGE') == 'db':
-        reviews = relationship("Review", "place")
-        amenities =\
-            relationship("Amenity", secondary=place_amenity,
-                         viewonly=False, back_populates="place_amenities")
-
+    reviews = relationship("Review", backref="place")
+    amenities =\
+        relationship("Amenity", secondary=place_amenity,
+                     viewonly=False, backref="place_amenities")
     @property
     def reviews(self):
         """

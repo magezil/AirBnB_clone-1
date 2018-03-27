@@ -22,8 +22,8 @@ class FileStorage:
         if cls is None:
             return self.__objects
         for key, val in FileStorage.__objects.items():
-            if cls == val["__class__"]:
-                objs[key] = value
+            if cls == val.__class__.__name__:
+                objs[key] = val
         return objs
 
     def new(self, obj):
