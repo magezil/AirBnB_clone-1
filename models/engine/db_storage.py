@@ -5,7 +5,7 @@
 import models
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from os import getenv
+import os
 from models.base_model import Base
 #from models import classes
 import models
@@ -43,7 +43,7 @@ class DBStorage:
             clses = [models.classes[cls]]
         for c in clses:
             for instance in self.__session.query(c):
-                key = "{}.{}".(c, instance.id)
+                key = "{}.{}".format(c, instance.id)
                 result[key] = instance
         return result
 
@@ -70,7 +70,7 @@ class DBStorage:
         '''
             Creates all tables in database and creates session
         '''
-        Base.metadata.create_all(engine)
+        Base.metadata.create_all(self.__engine)
         Session = scoped_session(sessionmaker(bind=self.__engine,
             expire_on_commit=False))
         self.__session = Session()
