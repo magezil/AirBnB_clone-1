@@ -38,27 +38,32 @@ class DBStorage:
                 value = object
         '''
         result = {}
+        clses = models.classes
         if cls != None:
-            for instance in __session.query(cls):
-                key = "{}.{}".(cls, instance.id)
+            clses = cls
+        for c in clses: 
+            for instance in self.__session.query(c):
+                key = "{}.{}".(c, instance.id)
                 result[key] = instance
-        else:
-            for c in models.classes: 
+        return result
 
     def new(self, obj):
         '''
             Add obj to current database session
         '''
+        self.__session.add(obj)
 
     def save(self):
         '''
             Commits all changes to the current database session
         '''
+        self.__session.commit()
 
     def delete(self, obj=None):
         '''
             Deletes obj from current database session if obj != None
         '''
+        self.__session.delete(obj)
 
     def reload(self):
         '''
@@ -67,4 +72,4 @@ class DBStorage:
         Base.metadata.create_all(engine)
         Session = scoped_session(sessionmaker(bind=self.__engine,
             expire_on_commit=False))
-        __session = Session()
+        self.__session = Session()
