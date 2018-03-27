@@ -223,7 +223,7 @@ class HBNBCommand(cmd.Cmd):
                 values[k] = v.replace("_", " ")
                 values[k] = v[1:]
                 if v[-1] == '"':
-                    values[k] = v[:-1]
+                    values[k] = v[1:-1]
             elif '.' in v:
                 try:
                     values[k] = float(v)
