@@ -13,6 +13,7 @@ from models.state import State
 from models.city import City
 from models.amenity import Amenity
 from models.review import Review
+import models
 
 
 class HBNBCommand(cmd.Cmd):
@@ -47,11 +48,11 @@ class HBNBCommand(cmd.Cmd):
         try:
             args = args.split()
             new_instance = eval(args[0])()
-            new_instance.save()
             print(new_instance.id)
             if len(args) > 1:
-                args[0] = args[0] + " {}".format(new_instance.id)
-                self.validator(args)
+                self.validator(args, new_instance)
+            else:
+                new_instance.save()
         except:
             raise
 #            print("** class doesn't exist **")
@@ -68,8 +69,7 @@ class HBNBCommand(cmd.Cmd):
         if len(args) == 1:
             print("** instance id missing **")
             return
-        storage = FileStorage()
-        storage.reload()
+        storage = models.storage
         obj_dict = storage.all()
         try:
             eval(args[0])
@@ -97,8 +97,7 @@ class HBNBCommand(cmd.Cmd):
             return
         class_name = args[0]
         class_id = args[1]
-        storage = FileStorage()
-        storage.reload()
+        storage = models.storage
         obj_dict = storage.all()
         try:
             eval(class_name)
@@ -117,22 +116,17 @@ class HBNBCommand(cmd.Cmd):
             Prints all string representation of all instances
             based or not on the class name.
         '''
-        obj_list = []
-        storage = FileStorage()
-        storage.reload()
-        objects = storage.all()
+        storage = models.storage
         try:
             if len(args) != 0:
                 eval(args)
         except NameError:
             print("** class doesn't exist **")
             return
-        for key, val in objects.items():
-            if len(args) != 0:
-                if type(val) is eval(args):
-                    obj_list.append(val)
-            else:
-                obj_list.append(val)
+        if len(args) == 0:
+            obj_list = [v for k, v in storage.all().items()]
+        else:
+            obj_list = [v for k, v in storage.all(args).items()]
 
         print(obj_list)
 
@@ -141,8 +135,7 @@ class HBNBCommand(cmd.Cmd):
             Update an instance based on the class name and id
             sent as args.
         '''
-        storage = FileStorage()
-        storage.reload()
+        storage = models.storage
         args = shlex.split(args)
         if len(args) == 0:
             print("** class name missing **")
@@ -187,8 +180,7 @@ class HBNBCommand(cmd.Cmd):
             Counts/retrieves the number of instances.
         '''
         obj_list = []
-        storage = FileStorage()
-        storage.reload()
+        storage = models.storage
         objects = storage.all()
         try:
             if len(args) != 0:
@@ -221,15 +213,15 @@ class HBNBCommand(cmd.Cmd):
         except:
             print("*** Unknown syntax:", args[0])
 
-    def validator(self, args):
+    def validator(self, args, obj):
         '''
-            Validates data to send to update after initializing a new class
+            Validates and parses data to send
         '''
         tempvalues = dict(s.split("=") for s in args[1:])
         values = {}
         for k, v in tempvalues.items():
             if v[0] == '"':
-                values[k] = v.replace("_", " ")
+                values[k] = v.replace("_", " ").replace('"', '')
             elif '.' in v:
                 try:
                     values[k] = float(v)
@@ -241,7 +233,9 @@ class HBNBCommand(cmd.Cmd):
                 except:
                     pass
         for k, v in values.items():
-            self.do_update("{} {} {}".format(args[0], k, v))
+            setattr(obj, k, v)
+        obj.save()
+
 
 if __name__ == "__main__":
     '''
