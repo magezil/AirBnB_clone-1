@@ -18,3 +18,12 @@ class User(BaseModel, Base):
     last_name = Column(String(128), nullable=False)
     places = relationship("Place", back_populates="user")
     reviews = relationship("Review", back_populates="user")
+
+    def __init__(self):
+        '''
+            Initialize local variables
+        '''
+        self.email = ""
+        self.password = ""
+        self.first_name = ""
+        self.last_name = ""
