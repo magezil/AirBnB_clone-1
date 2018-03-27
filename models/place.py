@@ -4,6 +4,8 @@
 '''
 from models.base_model import BaseModel, Base
 from sqlalchemy import Column, String, Integer, Float, ForeignKey
+from sqlalchemy.orm import relationship
+import os
 
 
 class Place(BaseModel, Base):
@@ -22,3 +24,13 @@ class Place(BaseModel, Base):
     latitude = Column(Float)
     longitude = Column(Float)
     amenity_ids = []
+    user = relationship("User", back_populates="places")
+
+    if os.getenv('HBNB_TYPE_STORAGE') == 'db':
+        """
+        class attribute reviews must represent a relationship with the class Review. If the Place object is deleted, all linked Review objects must be automatically deleted. Also, the reference from a Review object to his Place should be named `place
+        """
+    else:
+        """
+        : getter attribute reviews that returns the list of Review instances with place_id equals to the current Place.id => It will be the FileStorage relationship between Place and Review
+        """
