@@ -32,6 +32,7 @@ class State(BaseModel, Base):
         '''
             Returns all cities associated with current state instance
         '''
-        cities = [v for k,v in models.storage.all().items() if 'City' in k and v.state_id == self.id]
+        cities = [v for k, v in models.storage.all().items()
+                  if 'City' in k and v.state_id == self.id]
 
-#City.state = relationship("State", back_populates='cities')
+# City.state = relationship("State", back_populates='cities')

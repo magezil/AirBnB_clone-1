@@ -10,6 +10,7 @@ from sqlalchemy import Column, Integer, String, DateTime
 
 Base = declarative_base()
 
+
 class BaseModel:
     '''
         Base class for other classes to be used for the duration.

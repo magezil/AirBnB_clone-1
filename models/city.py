@@ -6,6 +6,7 @@ from models.base_model import BaseModel, Base
 from sqlalchemy import Column, Integer, String
 from sqlalchemy import ForeignKey
 
+
 class City(BaseModel, Base):
     '''
         Define the class City that inherits from BaseModel.
