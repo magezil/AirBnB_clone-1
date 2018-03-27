@@ -5,12 +5,23 @@
 import uuid
 from datetime import datetime
 import models
+from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy import Column, Integer, String, Datetime
 
+Base = declarative_base()
 
 class BaseModel:
     '''
         Base class for other classes to be used for the duration.
+        Attributes:
+        ID: auto generates ID for
+        created_at
+        updated_at
     '''
+    id = Column(String(60), primary_key=True)
+    created_at = Column(DateTime, nullable=False, default=datetime.utcnow)
+    updated_at = Column(DateTime, nullable=False, default=datetime.utcnow)
+
     def __init__(self, *args, **kwargs):
         '''
             Initialize public instance attributes.
@@ -19,7 +30,6 @@ class BaseModel:
             self.id = str(uuid.uuid4())
             self.created_at = datetime.now()
             self.updated_at = datetime.now()
-            models.storage.new(self)
         else:
             kwargs["created_at"] = datetime.strptime(kwargs["created_at"],
                                                      "%Y-%m-%dT%H:%M:%S.%f")
@@ -48,6 +58,7 @@ class BaseModel:
             Update the updated_at attribute with new.
         '''
         self.updated_at = datetime.now()
+        models.storage.new(self)
         models.storage.save()
 
     def to_dict(self):
@@ -55,8 +66,15 @@ class BaseModel:
             Return dictionary representation of BaseModel class.
         '''
         cp_dct = dict(self.__dict__)
+        if cp_dct['_sa_instance_state']:
+            cp_dct.pop('_sa_instance_state')
         cp_dct['__class__'] = self.__class__.__name__
         cp_dct['updated_at'] = self.updated_at.strftime("%Y-%m-%dT%H:%M:%S.%f")
         cp_dct['created_at'] = self.created_at.strftime("%Y-%m-%dT%H:%M:%S.%f")
 
         return (cp_dct)
+
+    def delete(self):
+        '''
+            Deletes current instance from models.storage using delete method
+        '''
