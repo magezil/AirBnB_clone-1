@@ -221,7 +221,10 @@ class HBNBCommand(cmd.Cmd):
         values = {}
         for k, v in tempvalues.items():
             if v[0] == '"':
-                values[k] = v.replace("_", " ").replace('"', '')
+                values[k] = v.replace("_", " ")
+                values[k] = v[1:]
+                if v[-1] == '"':
+                    values[k] = v[:-1]
             elif '.' in v:
                 try:
                     values[k] = float(v)
