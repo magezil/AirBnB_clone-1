@@ -15,7 +15,8 @@ class FileStorage:
 
     def all(self, cls=None):
         '''
-            Return the dictionary
+            Return the dictionary if cls == None, else return a dictionary of 
+            all classes of type cls
         '''
         objs = {}
         if cls is None:
