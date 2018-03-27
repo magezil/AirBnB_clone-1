@@ -7,7 +7,6 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, scoped_session
 import os
 from models.base_model import Base
-#from models import classes
 import models
 
 
@@ -33,13 +32,14 @@ class DBStorage:
 
     def all(self, cls=None):
         '''
-            Returns dictionary of all of type class or all of all types if cls == None
+            Returns dictionary of all of type class
+            or all of all types if cls == None
                 key = <class-name>.<object-id>
                 value = object
         '''
         result = {}
         clses = list(models.classes.values())
-        if cls != None:
+        if cls is not None:
             clses = [models.classes[cls]]
         for c in clses:
             for instance in self.__session.query(c):
@@ -72,5 +72,5 @@ class DBStorage:
         '''
         Base.metadata.create_all(self.__engine)
         Session = scoped_session(sessionmaker(bind=self.__engine,
-            expire_on_commit=False))
+                                 expire_on_commit=False))
         self.__session = Session()
