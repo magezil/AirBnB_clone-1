@@ -20,6 +20,9 @@ class User(BaseModel, Base):
     reviews = relationship("Review", back_populates="user")
 
     def __init__(self):
+        '''
+            Initialize local variables
+        '''
         self.email = ""
         self.password = ""
         self.first_name = ""
