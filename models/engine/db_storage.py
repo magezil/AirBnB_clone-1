@@ -38,10 +38,10 @@ class DBStorage:
                 value = object
         '''
         result = {}
-        clses = models.classes
+        clses = list(models.classes.values())
         if cls != None:
-            clses = cls
-        for c in clses: 
+            clses = [models.classes[cls]]
+        for c in clses:
             for instance in self.__session.query(c):
                 key = "{}.{}".(c, instance.id)
                 result[key] = instance
