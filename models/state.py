@@ -20,6 +20,12 @@ class State(BaseModel, Base):
 
     cities = relationship("City", backref='state')
 
+    def __init__(self):
+        '''
+            Initialize instance variables
+        '''
+        self.name = ""
+
     @property
     def cities(self):
         '''

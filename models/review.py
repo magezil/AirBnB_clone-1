@@ -17,3 +17,11 @@ class Review(BaseModel, Base):
     user_id = Column(String(60), ForeignKey('users.id'), nullable=False)
     user = relationship("User", back_populates="reviews")
 #    place = relationship("Place", "reviews")
+
+    def __init__(self):
+        '''
+            Initialize instance variables
+        '''
+        self.text = ""
+        self.place_id = ""
+        self.user_id = ""
