@@ -2,11 +2,16 @@
 '''
     Implementation of the Amenity class
 '''
-from models.base_model import BaseModel
+from models.base_model import BaseModel, Base
+from sqlalchemy import Column, String, ForeignKey
+from sqlalchemy import relationship
+from sqlalchemy.schema import Table
 
 
-class Amenity(BaseModel):
+class Amenity(BaseModel, Base):
     '''
         Implementation for the Amenities.
     '''
-    name = ""
+    __tablename__ = "amenities"
+    name = Column(String(128), nullable=False)
+    place_amenities = relationship("Place", secondary=place_amenity, back_populates="amenities")

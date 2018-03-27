@@ -23,14 +23,26 @@ class Place(BaseModel, Base):
     price_by_night = Column(Integer, nullable=False, default=0)
     latitude = Column(Float)
     longitude = Column(Float)
-    amenity_ids = []
     user = relationship("User", back_populates="places")
+    place_amenity = Table('association', Base.metadata,
+            Column('place_id', String(60), ForeignKey('places.id'), nullable=False),
+            Column('amenity_id', String(60), ForeignKey('amenities.id'), nullable=False)
+            )
 
     if os.getenv('HBNB_TYPE_STORAGE') == 'db':
-        """
-        class attribute reviews must represent a relationship with the class Review. If the Place object is deleted, all linked Review objects must be automatically deleted. Also, the reference from a Review object to his Place should be named `place
-        """
+        reviews = relationship("Review", "place")
+        amenities = relationship("Amenity", secondary=place_amenity, viewonly=False, back_populates="place_amenities")
     else:
-        """
-        : getter attribute reviews that returns the list of Review instances with place_id equals to the current Place.id => It will be the FileStorage relationship between Place and Review
-        """
+        reviews = storage.all(Review)
+        my_reviews = []
+        for review in reviews:
+            if review.place_id == self.id:
+                my_reviews.append(review)
+
+"""
+Getter attribute amenities that returns the list of Amenity instances based on the attribute amenity_ids that contains all Amenity.id linked to the Place
+Setter attribute amenities that handles append method for adding an Amenity.id to the attribute amenity_ids. This method should accept only Amenity object, otherwise, do nothing.
+"""
+    amenity_ids = []
+
+        return my_reviews
