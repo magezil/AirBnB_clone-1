@@ -48,11 +48,11 @@ class HBNBCommand(cmd.Cmd):
         try:
             args = args.split()
             new_instance = eval(args[0])()
-            print(new_instance.id)
             if len(args) > 1:
                 self.validator(args, new_instance)
             else:
                 new_instance.save()
+            print(new_instance.id)
         except:
             print("** class doesn't exist **")
 
@@ -76,7 +76,7 @@ class HBNBCommand(cmd.Cmd):
         except NameError:
             print("** class doesn't exist **")
             return
-        key = str(class_name) + "." + class_id
+        key = str(args[0]) + "." + class_id
         try:
             value = obj_dict[key]
             print(value)
