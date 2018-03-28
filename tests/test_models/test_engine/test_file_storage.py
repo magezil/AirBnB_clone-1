@@ -53,7 +53,7 @@ class testFileStorage(unittest.TestCase):
         city_key = str(new_city.__class__) + "." + str(new_city.id)
         self.storage.new(new_city)
         self.storage.new(new_state)
-        tmp = self.storage.all('City')
+        tmp = self.storage.all(models.City)
         state = tmp.get(state_key, None)
         city = tmp.get(city_key, None)
         self.assertTrue(city is not None)
