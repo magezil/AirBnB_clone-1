@@ -35,7 +35,7 @@ class TestUser(unittest.TestCase):
         self.assertTrue("last_name" in new_user.__dir__())
         self.assertTrue("password" in new_user.__dir__())
 
-    def test_type_email(self):
+    def test_User_type_email(self):
         '''
             Test the type of name
         '''
@@ -43,7 +43,7 @@ class TestUser(unittest.TestCase):
         name = getattr(new, "email")
         self.assertIsInstance(name, str)
 
-    def test_type_first_name(self):
+    def test_User_type_first_name(self):
         '''
             Test the type of name
         '''
@@ -51,7 +51,7 @@ class TestUser(unittest.TestCase):
         name = getattr(new, "first_name")
         self.assertIsInstance(name, str)
 
-    def test_type_last_name(self):
+    def test_User_type_last_name(self):
         '''
             Test the type of last_name
         '''
@@ -59,7 +59,7 @@ class TestUser(unittest.TestCase):
         name = getattr(new, "last_name")
         self.assertIsInstance(name, str)
 
-    def test_type_password(self):
+    def test_User_type_password(self):
         '''
             Test the type of password
         '''

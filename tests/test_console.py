@@ -26,23 +26,23 @@ class test_console(unittest.TestCase):
         ''' create an instance of the HBNBCommand class'''
         return HBNBCommand()
 
-    def test_quit(self):
+    def test_Console_quit(self):
         ''' Test quit exists'''
         console = self.create()
         self.assertTrue(console.onecmd("quit"))
 
-    def test_EOF(self):
+    def test_Console_EOF(self):
         ''' Test EOF exists'''
         console = self.create()
         self.assertTrue(console.onecmd("EOF"))
 
-    def test_all(self):
+    def test_Console_all(self):
         ''' Test all exists'''
         console = self.create()
         console.onecmd("all")
         self.assertTrue(isinstance(self.capt_out.getvalue(), str))
 
-    def test_show(self):
+    def test_Console_show(self):
         '''
             Testing that show exists
         '''
@@ -58,7 +58,7 @@ class test_console(unittest.TestCase):
         sys.stdout = self.backup
         self.assertTrue(str is type(x))
 
-    def test_show_class_name(self):
+    def test_Console_show_class_name(self):
         '''
             Testing the error messages for class name missing.
         '''
@@ -74,7 +74,7 @@ class test_console(unittest.TestCase):
         sys.stdout = self.backup
         self.assertEqual("** class name missing **\n", x)
 
-    def test_show_class_name(self):
+    def test_Console_show_class_name(self):
         '''
             Test show message error for id missing
         '''
@@ -90,7 +90,7 @@ class test_console(unittest.TestCase):
         sys.stdout = self.backup
         self.assertEqual("** instance id missing **\n", x)
 
-    def test_show_no_instance_found(self):
+    def test_Console_show_no_instance_found(self):
         '''
             Test show message error for id missing
         '''
@@ -106,7 +106,7 @@ class test_console(unittest.TestCase):
         sys.stdout = self.backup
         self.assertEqual("** no instance found **\n", x)
 
-    def test_create(self):
+    def test_Console_create(self):
         '''
             Test that create works
         '''
@@ -114,7 +114,7 @@ class test_console(unittest.TestCase):
         console.onecmd("create User")
         self.assertTrue(isinstance(self.capt_out.getvalue(), str))
 
-    def test_class_name(self):
+    def test_Console_class_name(self):
         '''
             Testing the error messages for class name missing.
         '''
@@ -123,7 +123,7 @@ class test_console(unittest.TestCase):
         x = (self.capt_out.getvalue())
         self.assertEqual("** class name missing **\n", x)
 
-    def test_class_name_doest_exist(self):
+    def test_Console_class_name_doest_exist(self):
         '''
             Testing the error messages for class name missing.
         '''

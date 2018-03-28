@@ -10,6 +10,7 @@ import unittest
 from models.base_model import BaseModel
 from models.state import State
 from models.engine.file_storage import FileStorage
+import models
 
 
 class testFileStorage(unittest.TestCase):
@@ -21,6 +22,7 @@ class testFileStorage(unittest.TestCase):
         '''
             Initializing classes
         '''
+        os.environ['HBNB_TYPE_STORAGE'] = 'file'
         self.storage = FileStorage()
         self.my_model = BaseModel()
 
@@ -34,14 +36,22 @@ class testFileStorage(unittest.TestCase):
         except FileNotFoundError:
             pass
 
-    def test_all_return_type(self):
+    def test_FileStorage_all_return_type(self):
         '''
             Tests the data type of the return value of the all method.
         '''
         storage_all = self.storage.all()
         self.assertIsInstance(storage_all, dict)
 
-    def test_new_method(self):
+    def test_FileStorage_all_class_specific(self):
+        '''
+            Test all method with a class specified
+        '''
+
+        tmp = self.storage.all(models.City)
+        self.assertEqual()
+
+    def test_FileStorage_new_method(self):
         '''
             Tests that the new method sets the right key and value pair
             in the FileStorage.__object attribute
@@ -50,7 +60,7 @@ class testFileStorage(unittest.TestCase):
         key = str(self.my_model.__class__.__name__ + "." + self.my_model.id)
         self.assertTrue(key in self.storage._FileStorage__objects)
 
-    def test_objects_value_type(self):
+    def test_FileStorage_objects_value_type(self):
         '''
             Tests that the type of value contained in the FileStorage.__object
             is of type obj.__class__.__name__
@@ -60,14 +70,14 @@ class testFileStorage(unittest.TestCase):
         val = self.storage._FileStorage__objects[key]
         self.assertIsInstance(self.my_model, type(val))
 
-    def test_save_file_exists(self):
+    def test_FileStorage_save_file_exists(self):
         '''
             Tests that a file gets created with the name file.json
         '''
         self.storage.save()
         self.assertTrue(os.path.isfile("file.json"))
 
-    def test_save_file_read(self):
+    def test_FileStorage_save_file_read(self):
         '''
             Testing the contents of the files inside the file.json
         '''
@@ -79,7 +89,7 @@ class testFileStorage(unittest.TestCase):
 
         self.assertTrue(type(content) is dict)
 
-    def test_the_type_file_content(self):
+    def test_FileStorage_the_type_file_content(self):
         '''
             testing the type of the contents inside the file.
         '''
@@ -91,7 +101,7 @@ class testFileStorage(unittest.TestCase):
 
         self.assertIsInstance(content, str)
 
-    def test_reaload_without_file(self):
+    def test_FileStorage_reaload_without_file(self):
         '''
             Tests that nothing happens when file.json does not exists
             and reload is called
@@ -103,7 +113,7 @@ class testFileStorage(unittest.TestCase):
         except:
             self.assertTrue(False)
 
-    def test_delete(self):
+    def test_FileStorage_delete(self):
         '''
             Tests delete function works
         '''
@@ -116,7 +126,7 @@ class testFileStorage(unittest.TestCase):
         self.storage.save()
         self.assertTrue(key not in self.storage._FileStorage__objects)
 
-    def test_delete_not_in(self):
+    def test_FileStorage_delete_not_in(self):
         '''
             Tests delete works for key not in storage
         '''
@@ -126,7 +136,7 @@ class testFileStorage(unittest.TestCase):
         self.storage.delete(new_state)
         self.assertTrue(key not in self.storage._FileStorage__objects)
 
-    def test_delete_None(self):
+    def test_FileStorage_delete_None(self):
         '''
             Tests delete function works for None - no change to __objects
         '''
