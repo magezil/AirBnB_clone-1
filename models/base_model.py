@@ -27,21 +27,16 @@ class BaseModel:
         '''
             Initialize public instance attributes.
         '''
-        self.id = str(uuid.uuid4())
-        self.created_at = datetime.now()
-        self.updated_at = datetime.now()
 
-        if (len(kwargs) != 0):
-            if "created_at" in kwargs:
-                kwargs["created_at"] = datetime.strptime(kwargs["created_at"],
-                                                         "%Y-%m-%dT%H:%M:%S.%f")
-                del kwargs["created_at"]
-
-            if "updated_at" in kwargs:
-                kwargs["updated_at"] = datetime.strptime(kwargs["updated_at"],
-                                                         "%Y-%m-%dT%H:%M:%S.%f")
-                del kwargs["updated_at"]
-
+        if (len(kwargs) == 0):
+            self.id = str(uuid.uuid4())
+            self.created_at = datetime.now()
+            self.updated_at = datetime.now()
+        else:
+            kwargs["created_at"] = datetime.strptime(kwargs["created_at"],
+                                                     "%Y-%m-%dT%H:%M:%S.%f")
+            kwargs["updated_at"] = datetime.strptime(kwargs["updated_at"],
+                                                     "%Y-%m-%dT%H:%M:%S.%f")
             for key, val in kwargs.items():
                 if "__class__" not in key:
                     setattr(self, key, val)

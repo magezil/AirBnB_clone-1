@@ -21,12 +21,12 @@ class TestUser(unittest.TestCase):
         new_city = City()
         self.assertIsInstance(new_city, BaseModel)
 
-    def test_User_attributes(self):
+    def test_City_attributes(self):
         new_city = City()
         self.assertTrue("state_id" in new_city.__dir__())
         self.assertTrue("name" in new_city.__dir__())
 
-    def test_type_name(self):
+    def test_City_type_name(self):
         '''
             Test the type of name
         '''
@@ -34,7 +34,7 @@ class TestUser(unittest.TestCase):
         name = getattr(new_city, "name")
         self.assertIsInstance(name, str)
 
-    def test_type_name(self):
+    def test_City_type_name(self):
         '''
             Test the type of name
         '''
