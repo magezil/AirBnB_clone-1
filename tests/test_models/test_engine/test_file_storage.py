@@ -49,8 +49,8 @@ class testFileStorage(unittest.TestCase):
         '''
         new_city = models.City()
         new_state = models.State()
-        state_key = str(new_state.__class__.__name__) + "." + str(new_state.id)
-        city_key = str(new_city.__class__.__name__) + "." + str(new_city.id)
+        state_key = str(new_state.__class__) + "." + str(new_state.id)
+        city_key = str(new_city.__class__) + "." + str(new_city.id)
         self.storage.new(new_city)
         self.storage.new(new_state)
         tmp = self.storage.all('City')
@@ -65,7 +65,7 @@ class testFileStorage(unittest.TestCase):
             in the FileStorage.__object attribute
         '''
         self.storage.new(self.my_model)
-        key = str(self.my_model.__class__.__name__ + "." + self.my_model.id)
+        key = str(self.my_model.__class__) + "." + self.my_model.id
         self.assertTrue(key in self.storage._FileStorage__objects)
 
     def test_FileStorage_objects_value_type(self):
@@ -74,7 +74,7 @@ class testFileStorage(unittest.TestCase):
             is of type obj.__class__.__name__
         '''
         self.storage.new(self.my_model)
-        key = str(self.my_model.__class__.__name__ + "." + self.my_model.id)
+        key = str(self.my_model.__class__) + "." + self.my_model.id
         val = self.storage._FileStorage__objects[key]
         self.assertIsInstance(self.my_model, type(val))
 
