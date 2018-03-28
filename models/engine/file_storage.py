@@ -22,7 +22,7 @@ class FileStorage:
         if cls is None:
             return self.__objects
         for key, val in FileStorage.__objects.items():
-            if cls == val.__class__.__name__:
+            if cls == val.__class__:
                 objs[key] = val
         return objs
 
@@ -32,7 +32,7 @@ class FileStorage:
             Aguments:
                 obj : An instance object.
         '''
-        key = str(obj.__class__.__name__) + "." + str(obj.id)
+        key = str(obj.__class__) + "." + str(obj.id)
         value_dict = obj
         FileStorage.__objects[key] = value_dict
 
@@ -67,6 +67,6 @@ class FileStorage:
         '''
         if not obj:
             return
-        key = str(obj.__class__.__name__) + "." + str(obj.id)
+        key = str(obj.__class__) + "." + str(obj.id)
         if key in FileStorage.__objects:
             del FileStorage.__objects[key]
