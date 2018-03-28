@@ -22,7 +22,8 @@ class FileStorage:
         if cls is None:
             return self.__objects
         for key, val in FileStorage.__objects.items():
-            if cls == val.__class__.__name__:
+            if cls == val.__class__:
+            #if cls == val.__class__.__name__:
                 objs[key] = val
         return objs
 
@@ -53,11 +54,14 @@ class FileStorage:
         '''
         try:
             with open(FileStorage.__file_path, encoding="UTF8") as fd:
-                FileStorage.__objects = json.load(fd)
-            for key, val in FileStorage.__objects.items():
+                objects = json.load(fd)
+            for key, val in objects.items():
                 class_name = val["__class__"]
                 class_name = models.classes[class_name]
-                FileStorage.__objects[key] = class_name(**val)
+                obj_id = val["id"]
+                new = class_name(**val)
+                key = str(class_name) + '.' + str(new.id)
+                FileStorage.__objects[key] = new
         except FileNotFoundError:
             pass
 
