@@ -105,8 +105,12 @@ class HBNBCommand(cmd.Cmd):
         key = str(class_name) + "." + class_id
         try:
             storage.delete(obj=obj_dict[key])
+            print("before delet ", obj_dict)
         except KeyError:
             print("** no instance found **")
+            print(obj_dict)
+            raise
+        print("after delet: ", obj_dict)
         storage.save()
 
     def do_all(self, args):
@@ -117,16 +121,13 @@ class HBNBCommand(cmd.Cmd):
         storage = models.storage
         try:
             if len(args) != 0:
-                eval(args)
+                class_name = eval(args)
+                print(storage.all(class_name))
+            else:
+                print(storage.all())
         except NameError:
             print("** class doesn't exist **")
             return
-        if len(args) == 0:
-            obj_list = [v for k, v in storage.all().items()]
-        else:
-            obj_list = [v for k, v in storage.all(models.classes[args]).items()]
-
-        print(obj_list)
 
     def do_update(self, args):
         '''
