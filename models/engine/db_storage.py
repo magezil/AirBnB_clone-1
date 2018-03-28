@@ -38,7 +38,7 @@ class DBStorage:
                 value = object
         '''
         result = {}
-        clses = list(models.classes.values())
+        clses = [v for k, v in models.classes.items() if "BaseModel" not in k]
         if cls is not None:
             clses = [models.classes[cls]]
         for c in clses:
