@@ -18,7 +18,7 @@ class State(BaseModel, Base):
     __tablename__ = 'states'
     name = Column(String(128), nullable=False)
 
-    cities = relationship("City", backref='state')
+    cities = relationship("City", passive_deletes=True, backref="state")
 
     def __init__(self):
         '''
@@ -34,5 +34,3 @@ class State(BaseModel, Base):
         '''
         cities = [v for k, v in models.storage.all().items()
                   if 'City' in k and v.state_id == self.id]
-
-# City.state = relationship("State", back_populates='cities')

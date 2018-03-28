@@ -55,6 +55,7 @@ class HBNBCommand(cmd.Cmd):
                 new_instance.save()
         except:
             print("** class doesn't exist **")
+            raise
 
     def do_show(self, args):
         '''
@@ -210,6 +211,7 @@ class HBNBCommand(cmd.Cmd):
             func(cmd_arg)
         except:
             print("*** Unknown syntax:", args[0])
+            raise
 
     def validator(self, args, obj):
         '''
