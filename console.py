@@ -94,23 +94,20 @@ class HBNBCommand(cmd.Cmd):
         elif len(args) == 1:
             print("** instance id missing **")
             return
+        class_name = args[0]
         class_id = args[1]
         storage = models.storage
         obj_dict = storage.all()
         try:
-            class_name = models.classes[args[0]]
+            models.classes[class_name]
         except NameError:
             print("** class doesn't exist **")
             return
-        key = str(class_name) + "." + class_id
+        key = class_name + "." + class_id
         try:
             storage.delete(obj=obj_dict[key])
-            print("before delet ", obj_dict)
         except KeyError:
             print("** no instance found **")
-            print(obj_dict)
-            raise
-        print("after delet: ", obj_dict)
         storage.save()
 
     def do_all(self, args):
