@@ -45,15 +45,15 @@ class testDBStorage(unittest.TestCase):
         '''
             Test all method with a class specified
         '''
-        new_user = models.User()
+        new_amenity = models.Amenity()
         new_state = models.State()
-        self.storage.new(new_user)
+        self.storage.new(new_amenity)
         self.storage.new(new_state)
         state_key = str(new_state.__class__) + "." + str(new_state.id)
-        user_key = str(new_user.__class__) + "." + str(new_user.id)
-        new_user.save()
+        user_key = str(new_amenity.__class__) + "." + str(new_amenity.id)
+        new_amenity.save()
         new_state.save()
-        tmp = self.storage.all('User')
+        tmp = self.storage.all(models.Amenity)
         state = tmp.get(state_key, None)
         user = tmp.get(user_key, None)
         self.assertTrue(user is not None)
