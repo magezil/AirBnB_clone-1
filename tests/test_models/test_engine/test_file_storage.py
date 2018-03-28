@@ -47,9 +47,17 @@ class testFileStorage(unittest.TestCase):
         '''
             Test all method with a class specified
         '''
-
-        tmp = self.storage.all(models.City)
-        self.assertEqual()
+        new_city = models.City()
+        new_state = models.State()
+        state_key = str(new_state.__class__.__name__) + "." + str(new_state.id)
+        city_key = str(new_city.__class__.__name__) + "." + str(new_city.id)
+        self.storage.new(new_city)
+        self.storage.new(new_state)
+        tmp = self.storage.all('City')
+        state = tmp.get(state_key, None)
+        city = tmp.get(city_key, None)
+        self.assertTrue(city is not None)
+        self.assertTrue(state is None)
 
     def test_FileStorage_new_method(self):
         '''
