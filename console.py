@@ -122,10 +122,12 @@ class HBNBCommand(cmd.Cmd):
         try:
             if len(args) != 0:
                 class_name = eval(args)
+                print(storage.all(class_name))
+            else:
+                print(storage.all())
         except NameError:
             print("** class doesn't exist **")
             return
-        print(storage.all(class_name))
 #        if len(args) == 0:
 #            obj_list = [v for k, v in storage.all().items()]
 #        else:
