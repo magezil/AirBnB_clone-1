@@ -49,14 +49,14 @@ class testFileStorage(unittest.TestCase):
         '''
         new_city = models.City()
         new_state = models.State()
-        state_key = str(new_state.__class__) + "." + str(new_state.id)
-        city_key = str(new_city.__class__) + "." + str(new_city.id)
+        state_key = str(new_state.__class__.__name__) + "." + str(new_state.id)
+        city_key = str(new_city.__class__.__name__) + "." + str(new_city.id)
         self.storage.new(new_city)
         self.storage.new(new_state)
         tmp = self.storage.all(models.City)
         state = tmp.get(state_key, None)
         city = tmp.get(city_key, None)
-        self.assertTrue(city is not None)
+        self.assertTrue(city is not None, msg="\n{}\n{}".format(tmp, city))
         self.assertTrue(state is None)
 
     def test_FileStorage_new_method(self):
@@ -65,7 +65,7 @@ class testFileStorage(unittest.TestCase):
             in the FileStorage.__object attribute
         '''
         self.storage.new(self.my_model)
-        key = str(self.my_model.__class__) + "." + self.my_model.id
+        key = str(self.my_model.__class__.__name__) + "." + self.my_model.id
         self.assertTrue(key in self.storage._FileStorage__objects)
 
     def test_FileStorage_objects_value_type(self):
@@ -74,7 +74,7 @@ class testFileStorage(unittest.TestCase):
             is of type obj.__class__.__name__
         '''
         self.storage.new(self.my_model)
-        key = str(self.my_model.__class__) + "." + self.my_model.id
+        key = str(self.my_model.__class__.__name__) + "." + self.my_model.id
         val = self.storage._FileStorage__objects[key]
         self.assertIsInstance(self.my_model, type(val))
 
@@ -126,20 +126,19 @@ class testFileStorage(unittest.TestCase):
             Tests delete function works
         '''
         new_state = State()
-        name = "California"
         key = str(new_state.__class__.__name__ + "." + new_state.id)
         self.storage.new(new_state)
+        self.assertTrue(key in self.storage._FileStorage__objects, msg="Object wasn't saved to storage")
         self.storage.save()
         self.storage.delete(new_state)
         self.storage.save()
-        self.assertTrue(key not in self.storage._FileStorage__objects)
+        self.assertTrue(key not in self.storage._FileStorage__objects, msg="Object wasn't deleted from storage")
 
     def test_FileStorage_delete_not_in(self):
         '''
             Tests delete works for key not in storage
         '''
         new_state = State()
-        name = "California"
         key = str(new_state.__class__.__name__ + "." + new_state.id)
         self.storage.delete(new_state)
         self.assertTrue(key not in self.storage._FileStorage__objects)
