@@ -22,8 +22,7 @@ class FileStorage:
         if cls is None:
             return self.__objects
         for key, val in FileStorage.__objects.items():
-            if cls == val.__class__:
-            #if cls == val.__class__.__name__:
+            if cls.__name__ == val.__class__.__name__:
                 objs[key] = val
         return objs
 
@@ -33,7 +32,7 @@ class FileStorage:
             Aguments:
                 obj : An instance object.
         '''
-        key = str(obj.__class__) + "." + str(obj.id)
+        key = str(obj.__class__.__name__) + "." + str(obj.id)
         value_dict = obj
         FileStorage.__objects[key] = value_dict
 
@@ -60,7 +59,7 @@ class FileStorage:
                 class_name = models.classes[class_name]
                 obj_id = val["id"]
                 new = class_name(**val)
-                key = str(class_name) + '.' + str(new.id)
+                key = str(class_name.__name__) + '.' + str(new.id)
                 FileStorage.__objects[key] = new
         except FileNotFoundError:
             pass
@@ -71,6 +70,6 @@ class FileStorage:
         '''
         if not obj:
             return
-        key = str(obj.__class__) + "." + str(obj.id)
+        key = str(obj.__class__.__name__) + "." + str(obj.id)
         if key in FileStorage.__objects:
             del FileStorage.__objects[key]
