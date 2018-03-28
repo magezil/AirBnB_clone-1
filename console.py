@@ -124,7 +124,7 @@ class HBNBCommand(cmd.Cmd):
         if len(args) == 0:
             obj_list = [v for k, v in storage.all().items()]
         else:
-            obj_list = [v for k, v in storage.all(args).items()]
+            obj_list = [v for k, v in storage.all(models.classes[args]).items()]
 
         print(obj_list)
 
