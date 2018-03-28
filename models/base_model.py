@@ -39,7 +39,6 @@ class BaseModel:
                                                      "%Y-%m-%dT%H:%M:%S.%f")
             for key, val in kwargs.items():
                 if "__class__" not in key:
-                    print("setting ", key, val)
                     setattr(self, key, val)
 
     def __str__(self):
