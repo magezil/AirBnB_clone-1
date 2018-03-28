@@ -15,10 +15,10 @@ class City(BaseModel, Base):
     name = Column(String(128), nullable=False)
     state_id = Column(String(60), ForeignKey('states.id', ondelete='CASCADE'))
 
-    def __init__(self):
+    def __init__(self, *args, **kwargs):
         '''
             Initializes values of our attributes to correct types
         '''
         self.name = ""
         self.state_id = ""
-        super().__init__()
+        super().__init__(kwargs)

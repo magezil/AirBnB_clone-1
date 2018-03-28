@@ -14,12 +14,12 @@ class Amenity(BaseModel, Base):
     __tablename__ = "amenities"
     name = Column(String(128), nullable=False, default="")
 
-    def __init__(self):
+    def __init__(self, *args, **kwargs):
         '''
             Initializes values of our attributes to correct types
         '''
         self.name = ""
-        super().__init__()
+        super().__init__(kwargs)
 
 #    place_amenities = relationship(
 #            "Place", secondary="place_amenity", back_populates="amenities")

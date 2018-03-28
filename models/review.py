@@ -18,11 +18,11 @@ class Review(BaseModel, Base):
     user = relationship("User", back_populates="reviews")
 #    place = relationship("Place", "reviews")
 
-    def __init__(self):
+    def __init__(self, *args, **kwargs):
         '''
             Initialize instance variables
         '''
         self.text = ""
         self.place_id = ""
         self.user_id = ""
-        super().__init__()
+        super().__init__(kwargs)

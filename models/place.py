@@ -37,7 +37,7 @@ class Place(BaseModel, Base):
         relationship("Amenity", secondary=place_amenity,
                      viewonly=False, backref="place_amenities")
 
-    def __init__(self):
+    def __init__(self, *args, **kwargs):
         '''
             Initializes values of our attributes to correct types
         '''
@@ -51,7 +51,7 @@ class Place(BaseModel, Base):
         self.price_by_night = 0
         self.latitude = 0.0
         self.longitude = 0.0
-        super().__init__()
+        super().__init__(kwargs)
 
     @property
     def reviews(self):

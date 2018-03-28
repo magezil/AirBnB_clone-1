@@ -20,12 +20,12 @@ class State(BaseModel, Base):
 
     cities = relationship("City", passive_deletes=True, backref="state")
 
-    def __init__(self):
+    def __init__(self, *args, **kwargs):
         '''
             Initialize instance variables
         '''
         self.name = ""
-        super().__init__()
+        super().__init__(kwargs)
 
     @property
     def cities(self):

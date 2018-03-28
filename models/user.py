@@ -19,7 +19,7 @@ class User(BaseModel, Base):
     places = relationship("Place", back_populates="user")
     reviews = relationship("Review", back_populates="user")
 
-    def __init__(self):
+    def __init__(self, *args, **kwargs):
         '''
             Initialize local variables
         '''
@@ -27,4 +27,4 @@ class User(BaseModel, Base):
         self.password = ""
         self.first_name = ""
         self.last_name = ""
-        super().__init__()
+        super().__init__(kwargs)
