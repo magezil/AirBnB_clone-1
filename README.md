@@ -1,9 +1,10 @@
+Based on v1 completed by Steven Garcia and Binita Rai
+
 # Synopsis
 
 The Airbnb clone project for which we are creating a copy of the [Airbnb](https://www.airbnb.com/).
 Only some features will be implemented and will be listed below once completed.
 
-Based on v1.0 Completed by Steven Garcia and Binita Rai
 
 ## Features
 
