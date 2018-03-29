@@ -62,19 +62,3 @@ class Place(BaseModel, Base):
             if review.place_id == self.id:
                 my_reviews.append(review)
         return my_reviews
-
-    @property
-    def amenities(self):
-        """
-            Property amenities: amenities associated with place.id
-
-            Setter validates obj is Amenity
-
-            Parameter:
-                obj: object to append obj.id to amenity_ids
-        """
-        return Place.amenity_ids
-
-    def amenities(self, obj):
-        if type(obj) is Amenity:
-            Place.amenity_ids.append(obj.id)
