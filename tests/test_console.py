@@ -132,7 +132,7 @@ class test_console(unittest.TestCase):
         x = (self.capt_out.getvalue())
         self.assertEqual("** class doesn't exist **\n", x)
 
-    def test_destroy(self):
+    def test_Console_destroy(self):
         '''
             test destroy method in console
         '''
