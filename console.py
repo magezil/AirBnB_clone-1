@@ -121,7 +121,8 @@ class HBNBCommand(cmd.Cmd):
         try:
             if len(args) != 0:
                 class_name = eval(args)
-                all_instance = [val for val in storage.all(class_name).values()]
+                all_instance = [val for val in storage.all(class_name)
+                                .values()]
             else:
                 all_instance = [val for val in storage.all().values()]
             print(all_instance)
