@@ -16,8 +16,10 @@ class Place(BaseModel, Base):
     __tablename__ = "places"
 
     if os.getenv('HBNB_TYPE_STORAGE') == 'db':
-        city_id = Column(String(60), ForeignKey('cities.id'), nullable=False)
-        user_id = Column(String(60), ForeignKey('users.id'), nullable=False)
+        city_id = Column(String(60), ForeignKey(
+            'cities.id', ondelete='CASCADE'), nullable=False)
+        user_id = Column(String(60), ForeignKey(
+            'users.id', ondelete='CASCADE'), nullable=False)
         name = Column(String(128), nullable=False)
         description = Column(String(1024))
         number_rooms = Column(Integer, nullable=False, default=0)
@@ -26,18 +28,17 @@ class Place(BaseModel, Base):
         price_by_night = Column(Integer, nullable=False, default=0)
         latitude = Column(Float)
         longitude = Column(Float)
-        user = relationship("User", back_populates="places")
-        place_amenity = Table('association', Base.metadata,
-                            Column('place_id', String(60),
-                                    ForeignKey('places.id'), nullable=False),
-                            Column('amenity_id', String(60),
-                                    ForeignKey('amenities.id'), nullable=False))
+        place_amenity = Table(
+            'association', Base.metadata, Column('place_id', String(
+                60), ForeignKey('places.id'), nullable=False), Column(
+                'amenity_id', String(60), ForeignKey(
+                    'amenities.id'), nullable=False))
         amenity_ids = []
 
-        reviews = relationship("Review", backref="place")
-        amenities =\
-            relationship("Amenity", secondary=place_amenity,
-                        viewonly=False, backref="place_amenities")
+        reviews = relationship("Review", passive_deletes=True, backref="place")
+        amenities = relationship(
+            "Amenity", secondary=place_amenity, viewonly=False,
+            backref="place_amenities")
 
     else:
         city_id = ""
@@ -76,6 +77,7 @@ class Place(BaseModel, Base):
         """
         return Place.amenity_ids
 
+    @amenities.setter
     def amenities(self, obj):
         if type(obj) is Amenity:
             Place.amenity_ids.append(obj.id)
