@@ -18,7 +18,7 @@ class Amenity(BaseModel, Base):
         name = Column(String(128), nullable=False, default="")
 
     else:
-        self.name = ""
+        name = ""
 
 #    place_amenities = relationship(
 #            "Place", secondary="place_amenity", back_populates="amenities")
