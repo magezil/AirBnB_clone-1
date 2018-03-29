@@ -80,6 +80,6 @@ class Place(BaseModel, Base):
             return Place.amenity_ids
 
         @amenities.setter
-        def amenities(self, obj):
+        def amenities(self, obj=None):
             if type(obj) is Amenity:
                 Place.amenity_ids.append(obj.id)
