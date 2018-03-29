@@ -41,24 +41,6 @@ class testDBStorage(unittest.TestCase):
         new_dict = self.storage.all()
         self.assertTrue(type(new_dict) == type(dict()))
 
-    def test_DBStorage_all_class_specific(self):
-        '''
-            Test all method with a class specified
-        '''
-        new_amenity = models.Amenity(name="TV")
-        new_state = models.State(name="California")
-        self.storage.new(new_amenity)
-        self.storage.new(new_state)
-        state_key = str(new_state.__class__) + "." + str(new_state.id)
-        user_key = str(new_amenity.__class__) + "." + str(new_amenity.id)
-        new_amenity.save()
-        new_state.save()
-        tmp = self.storage.all(models.Amenity)
-        state = tmp.get(state_key, None)
-        user = tmp.get(user_key, None)
-        self.assertTrue(user is not None)
-        self.assertTrue(state is None)
-
     def test_DBStorage_new_method(self):
         '''
             Test new method
