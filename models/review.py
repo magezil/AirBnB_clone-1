@@ -12,7 +12,7 @@ class Review(BaseModel, Base):
     '''
         Implementation for the Review.
     '''
-    __tablename__ = "review"
+    __tablename__ = "reviews"
 
     if os.getenv('HBNB_TYPE_STORAGE') == 'db':
         text = Column(String(1024), nullable=False)

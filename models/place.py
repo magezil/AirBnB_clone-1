@@ -54,32 +54,32 @@ class Place(BaseModel, Base):
         longitude = 0.0
         amenity_ids = []
 
-    @property
-    def reviews(self):
-        """
-            Property reviews: reviews associated with place.id
-        """
-        reviews = models.storage.all(models.Review)
-        my_reviews = []
-        for review in reviews:
-            if review.place_id == self.id:
-                my_reviews.append(review)
-        return my_reviews
+        @property
+        def reviews(self):
+            """
+                Property reviews: reviews associated with place.id
+            """
+            reviews = models.storage.all(models.Review)
+            my_reviews = []
+            for review in reviews:
+                if review.place_id == self.id:
+                    my_reviews.append(review)
+            return my_reviews
 
-    @property
-    def amenities(self):
-        """
-            Property amenities: amenities associated with place.id
+        @property
+        def amenities(self):
+            """
+                Property amenities: amenities associated with place.id
 
-            Setter validates obj is Amenity
+                Setter validates obj is Amenity
 
-            Parameter:
-                obj: object to append obj.id to amenity_ids
-        """
+                Parameter:
+                    obj: object to append obj.id to amenity_ids
+            """
 
-        return Place.amenity_ids
+            return Place.amenity_ids
 
-    @amenities.setter
-    def amenities(self, obj):
-        if type(obj) is Amenity:
-            Place.amenity_ids.append(obj.id)
+        @amenities.setter
+        def amenities(self, obj):
+            if type(obj) is Amenity:
+                Place.amenity_ids.append(obj.id)
