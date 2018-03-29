@@ -45,8 +45,8 @@ class testDBStorage(unittest.TestCase):
         '''
             Test all method with a class specified
         '''
-        new_amenity = models.Amenity()
-        new_state = models.State()
+        new_amenity = models.Amenity(name="TV")
+        new_state = models.State(name="California")
         self.storage.new(new_amenity)
         self.storage.new(new_state)
         state_key = str(new_state.__class__) + "." + str(new_state.id)
