@@ -43,7 +43,7 @@ class DBStorage:
             clses = [cls]
         for c in clses:
             for instance in self.__session.query(c):
-                key = "{}.{}".format(c, instance.id)
+                key = "{}.{}".format(c().__class__.__name__, instance.id)
                 result[key] = instance
         return result
 
