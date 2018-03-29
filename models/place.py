@@ -6,8 +6,16 @@ from models.base_model import BaseModel, Base
 from sqlalchemy import Column, String, Integer, Float, ForeignKey
 from sqlalchemy.orm import relationship
 from sqlalchemy.schema import Table
+import models
 import os
 
+
+if os.getenv('HBNB_TYPE_STORAGE') == 'db':
+    association_table = Table('place_amenity', Base.metadata,
+        Column('place_id', String(60), ForeignKey('places.id'),
+            nullable=False, primary_key=True),
+        Column('amenity_id', String(60), ForeignKey('amenities.id'),
+            nullable=False, primary_key=True))
 
 class Place(BaseModel, Base):
     '''
@@ -28,17 +36,10 @@ class Place(BaseModel, Base):
         price_by_night = Column(Integer, nullable=False, default=0)
         latitude = Column(Float)
         longitude = Column(Float)
-        place_amenity = Table(
-            'association', Base.metadata, Column('place_id', String(
-                60), ForeignKey('places.id'), nullable=False), Column(
-                'amenity_id', String(60), ForeignKey(
-                    'amenities.id'), nullable=False))
-        amenity_ids = []
 
         reviews = relationship("Review", passive_deletes=True, backref="place")
         amenities = relationship(
-            "Amenity", secondary=place_amenity, viewonly=False,
-            backref="place_amenities")
+            "Amenity", secondary=association_table, viewonly=False)
 
     else:
         city_id = ""
@@ -58,7 +59,7 @@ class Place(BaseModel, Base):
         """
             Property reviews: reviews associated with place.id
         """
-        reviews = storage.all(Review)
+        reviews = models.storage.all(models.Review)
         my_reviews = []
         for review in reviews:
             if review.place_id == self.id:
@@ -75,6 +76,7 @@ class Place(BaseModel, Base):
             Parameter:
                 obj: object to append obj.id to amenity_ids
         """
+
         return Place.amenity_ids
 
     @amenities.setter
