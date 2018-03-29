@@ -117,12 +117,14 @@ class HBNBCommand(cmd.Cmd):
             based or not on the class name.
         '''
         storage = models.storage
+        all_instance = []
         try:
             if len(args) != 0:
                 class_name = eval(args)
-                print(storage.all(class_name))
+                all_instance = [val for val in storage.all(class_name).values()]
             else:
-                print(storage.all())
+                all_instance = [val for val in storage.all().values()]
+            print(all_instance)
         except NameError:
             print("** class doesn't exist **")
             return
