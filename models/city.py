@@ -16,8 +16,9 @@ class City(BaseModel, Base):
 
     if os.getenv('HBNB_TYPE_STORAGE') == 'db':
         name = Column(String(128), nullable=False)
-        state_id = Column(String(60), ForeignKey('states.id', ondelete='CASCADE'))
+        state_id = Column(String(60), ForeignKey('states.id',
+                          ondelete='CASCADE'))
 
     else:
-        self.name = ""
-        self.state_id = ""
+        name = ""
+        state_id = ""

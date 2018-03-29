@@ -22,6 +22,6 @@ class Review(BaseModel, Base):
     #    place = relationship("Place", "reviews")
 
     else:
-        self.text = ""
-        self.place_id = ""
-        self.user_id = ""
+        text = ""
+        place_id = ""
+        user_id = ""

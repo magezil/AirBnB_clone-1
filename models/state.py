@@ -23,7 +23,7 @@ class State(BaseModel, Base):
         cities = relationship("City", passive_deletes=True, backref="state")
 
     else:
-        self.name = ""
+        name = ""
 
     @property
     def cities(self):

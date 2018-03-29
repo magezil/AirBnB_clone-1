@@ -23,7 +23,7 @@ class User(BaseModel, Base):
         reviews = relationship("Review", back_populates="user")
 
     else:
-        self.email = ""
-        self.password = ""
-        self.first_name = ""
-        self.last_name = ""
+        email = ""
+        password = ""
+        first_name = ""
+        last_name = ""
