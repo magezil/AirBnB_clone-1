@@ -132,11 +132,32 @@ class test_console(unittest.TestCase):
         x = (self.capt_out.getvalue())
         self.assertEqual("** class doesn't exist **\n", x)
 
-    '''
     def test_destroy(self):
+        '''
+            test destroy method in console
+        '''
         console = self.create()
-        self.assertTrue(console.onecmd("destroy"))
-
+        console.onecmd("create State")
+        state_id = (self.capt_out.getvalue())
+        sys.stdout = self.backup
+        self.capt_out.close()
+        self.capt_out = StringIO()
+        sys.stdout = self.capt_out
+        console.onecmd("show State {}".format(state_id))
+        show_out = (self.capt_out.getvalue())
+        sys.stdout = self.backup
+        self.capt_out.close()
+        self.capt_out = StringIO()
+        sys.stdout = self.capt_out
+        self.assertTrue(show_out not in ["** no instance found **\n",
+                        "** class name missing **\n",
+                        "** instance id missing **\n",
+                        "** class doesn't exist **\n"])
+        console.onecmd("destroy State {}".format(state_id))
+        console.onecmd("show State {}".format(state_id))
+        show_out = (self.capt_out.getvalue())
+        self.assertEqual(show_out, "** no instance found **\n")
+'''
     def test_update(self):
         console = self.create()
         self.assertTrue(console.onecmd("update"))
