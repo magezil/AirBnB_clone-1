@@ -12,13 +12,11 @@ class City(BaseModel, Base):
         Define the class City that inherits from BaseModel.
     '''
     __tablename__ = 'cities'
-    name = Column(String(128), nullable=False)
-    state_id = Column(String(60), ForeignKey('states.id', ondelete='CASCADE'))
 
-    def __init__(self, *args, **kwargs):
-        '''
-            Initializes values of our attributes to correct types
-        '''
+    if os.getenv('HBNB_TYPE_STORAGE') == 'db':
+        name = Column(String(128), nullable=False)
+        state_id = Column(String(60), ForeignKey('states.id', ondelete='CASCADE'))
+
+    else:
         self.name = ""
         self.state_id = ""
-        super().__init__(kwargs)

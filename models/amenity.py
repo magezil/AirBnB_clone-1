@@ -12,14 +12,12 @@ class Amenity(BaseModel, Base):
         Implementation for the Amenities.
     '''
     __tablename__ = "amenities"
-    name = Column(String(128), nullable=False, default="")
 
-    def __init__(self, *args, **kwargs):
-        '''
-            Initializes values of our attributes to correct types
-        '''
+    if os.getenv('HBNB_TYPE_STORAGE') == 'db':
+        name = Column(String(128), nullable=False, default="")
+
+    else:
         self.name = ""
-        super().__init__(kwargs)
 
 #    place_amenities = relationship(
 #            "Place", secondary="place_amenity", back_populates="amenities")

@@ -14,33 +14,32 @@ class Place(BaseModel, Base):
         Define the class Place that inherits from BaseModel.
     '''
     __tablename__ = "places"
-    city_id = Column(String(60), ForeignKey('cities.id'), nullable=False)
-    user_id = Column(String(60), ForeignKey('users.id'), nullable=False)
-    name = Column(String(128), nullable=False)
-    description = Column(String(1024))
-    number_rooms = Column(Integer, nullable=False, default=0)
-    number_bathrooms = Column(Integer, nullable=False, default=0)
-    max_guest = Column(Integer, nullable=False, default=0)
-    price_by_night = Column(Integer, nullable=False, default=0)
-    latitude = Column(Float)
-    longitude = Column(Float)
-    user = relationship("User", back_populates="places")
-    place_amenity = Table('association', Base.metadata,
-                          Column('place_id', String(60),
-                                 ForeignKey('places.id'), nullable=False),
-                          Column('amenity_id', String(60),
-                                 ForeignKey('amenities.id'), nullable=False))
-    amenity_ids = []
 
-    reviews = relationship("Review", backref="place")
-    amenities =\
-        relationship("Amenity", secondary=place_amenity,
-                     viewonly=False, backref="place_amenities")
+    if os.getenv('HBNB_TYPE_STORAGE') == 'db':
+        city_id = Column(String(60), ForeignKey('cities.id'), nullable=False)
+        user_id = Column(String(60), ForeignKey('users.id'), nullable=False)
+        name = Column(String(128), nullable=False)
+        description = Column(String(1024))
+        number_rooms = Column(Integer, nullable=False, default=0)
+        number_bathrooms = Column(Integer, nullable=False, default=0)
+        max_guest = Column(Integer, nullable=False, default=0)
+        price_by_night = Column(Integer, nullable=False, default=0)
+        latitude = Column(Float)
+        longitude = Column(Float)
+        user = relationship("User", back_populates="places")
+        place_amenity = Table('association', Base.metadata,
+                            Column('place_id', String(60),
+                                    ForeignKey('places.id'), nullable=False),
+                            Column('amenity_id', String(60),
+                                    ForeignKey('amenities.id'), nullable=False))
+        amenity_ids = []
 
-    def __init__(self, *args, **kwargs):
-        '''
-            Initializes values of our attributes to correct types
-        '''
+        reviews = relationship("Review", backref="place")
+        amenities =\
+            relationship("Amenity", secondary=place_amenity,
+                        viewonly=False, backref="place_amenities")
+
+    else:
         self.city_id = ""
         self.user_id = ""
         self.name = ""
@@ -51,7 +50,6 @@ class Place(BaseModel, Base):
         self.price_by_night = 0
         self.latitude = 0.0
         self.longitude = 0.0
-        super().__init__(kwargs)
 
     @property
     def reviews(self):

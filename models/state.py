@@ -16,16 +16,14 @@ class State(BaseModel, Base):
         Implementation for the State.
     '''
     __tablename__ = 'states'
-    name = Column(String(128), nullable=False)
 
-    cities = relationship("City", passive_deletes=True, backref="state")
+    if os.getenv('HBNB_TYPE_STORAGE') == 'db':
+        name = Column(String(128), nullable=False)
 
-    def __init__(self, *args, **kwargs):
-        '''
-            Initialize instance variables
-        '''
+        cities = relationship("City", passive_deletes=True, backref="state")
+
+    else:
         self.name = ""
-        super().__init__(kwargs)
 
     @property
     def cities(self):
