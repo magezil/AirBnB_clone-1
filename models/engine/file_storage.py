@@ -57,7 +57,8 @@ class FileStorage:
             for key, val in objects.items():
                 class_name = val["__class__"]
                 class_name = models.classes[class_name]
-                obj_id = val["id"]
+                if "id" in val:
+                    obj_id = val["id"]
                 new = class_name(**val)
                 key = str(class_name.__name__) + '.' + str(new.id)
                 FileStorage.__objects[key] = new
