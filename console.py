@@ -33,6 +33,7 @@ class HBNBCommand(cmd.Cmd):
         '''
             Exits after receiving the EOF signal.
         '''
+        print()
         return True
 
     def do_create(self, args):
@@ -53,7 +54,7 @@ class HBNBCommand(cmd.Cmd):
             else:
                 new_instance.save()
             print(new_instance.id)
-        except:
+        except NameError:
             print("** class doesn't exist **")
 
     def do_show(self, args):
@@ -73,7 +74,7 @@ class HBNBCommand(cmd.Cmd):
         obj_dict = storage.all()
         try:
             class_name = models.classes[args[0]]
-        except NameError:
+        except KeyError:
             print("** class doesn't exist **")
             return
         key = str(args[0]) + "." + class_id

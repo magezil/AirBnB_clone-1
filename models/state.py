@@ -25,10 +25,11 @@ class State(BaseModel, Base):
     else:
         name = ""
 
-    @property
-    def cities(self):
-        '''
-            Returns all cities associated with current state instance
-        '''
-        cities = [v for k, v in models.storage.all().items()
-                  if 'City' in k and v.state_id == self.id]
+        @property
+        def cities(self):
+            '''
+                Returns all cities associated with current state instance
+            '''
+            cities = [v for k, v in models.storage.all().items()
+                    if 'City' in k and v.state_id == self.id]
+            return cities

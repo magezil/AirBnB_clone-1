@@ -19,6 +19,7 @@ class User(BaseModel, Base):
         password = Column(String(128), nullable=False)
         first_name = Column(String(128), nullable=False)
         last_name = Column(String(128), nullable=False)
+
         places = relationship("Place", back_populates="user")
         reviews = relationship("Review", back_populates="user")
 
