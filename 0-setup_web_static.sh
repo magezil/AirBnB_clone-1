@@ -12,7 +12,7 @@ ln -sf /data/web_static/releases/test/ /data/web_static/current
 
 chown -R ubuntu:ubuntu /data
 
-new_str="server {\nlocation /hbnb_static {\nalias /data/webstatic/current;\n}\n}"
-sed -i "/http {/ a $new_str" /etc/nginx/nginx.conf
+new_str="location /hbnb_static {\nalias /data/web_static/current;\n}"
+sed -i "/# Only/ i $new_str" /etc/nginx/sites-available/default
 
 service nginx restart
