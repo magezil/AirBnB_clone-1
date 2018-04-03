@@ -19,7 +19,6 @@ def do_pack():
     """
     from fabric.operations import local
     from datetime import datetime
-    import os
 
     name = "./versions/web_static_{}.tgz"
     name = name.format(datetime.now().strftime("%Y%m%d%H%M%S"))
