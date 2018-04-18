@@ -28,6 +28,7 @@ def hbnb():
 @app.route('/c/<text>', strict_slashes=False)
 def cprint(text):
     """
+        Route /c/<text> displays C followed by text
     """
     return "C {}".format(text)
 
