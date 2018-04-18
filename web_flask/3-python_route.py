@@ -35,13 +35,12 @@ def cprint(text):
     return "C {}".format(text.replace('_', ' '))
 
 
+@app.route('/python', strict_slashes=False)
 @app.route('/python/<text>', strict_slashes=False)
-def pyprint(text):
+def pyprint(text="is cool"):
     """
         Route /python/<text> displays Python followed by text
     """
-    if not text:
-        text = "is cool"
     return "Python {}".format(text.replace('_', ' '))
 
 
