@@ -18,3 +18,7 @@
 ### 4-number_route.py
 * Add route /number/<n> that displays 'n is a number' if n is an integer
 
+### 5-number_template.py, templates/5-number.html
+* Add route /number_template/<n> to display HTML only if n is an integer
+* HTML to display: <H1>Number: `n`</H1>
+
