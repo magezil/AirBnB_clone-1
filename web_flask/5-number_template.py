@@ -9,7 +9,7 @@
     Has route /number/<n> that displays 'n is a number' if n is an integer
     Add route /number_template/<n> to display HTML only if n is an integer
 """
-from flask import Flask
+from flask import Flask, render_template
 app = Flask(__name__)
 
 
@@ -55,11 +55,11 @@ def nprint(n):
 
 
 @app.route('/number_template/<int:n>', strict_slashes=False)
-def nprint(n):
+def ntemplate(n):
     """
         Route /number_template/<n> that displays webpage if n is an integer
     """
-    return render_template('templates/5-number.html', n=n)
+    return render_template('5-number.html', n=n)
 
 
 if __name__ == "__main__":
