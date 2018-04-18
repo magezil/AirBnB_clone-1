@@ -9,7 +9,7 @@
     Has route /number/<n> that displays 'n is a number' if n is an integer
     Add /number_odd_or_even/<n> route displays HTML if n is a number
 """
-from flask import Flask
+from flask import Flask, render_template
 app = Flask(__name__)
 
 
