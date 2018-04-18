@@ -21,7 +21,8 @@ def hello_world():
     """
         Route /hbnb displays "Hello HBNB!"
     """
-    return 'Hello HBNB!'
+    return 'HBNB'
+
 
 if __name__ == "__main__":
     app.run()
