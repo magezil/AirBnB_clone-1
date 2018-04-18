@@ -7,3 +7,7 @@
 
 ### 1-hbnb_route.pyt
 * Add route `/hbnb` that displays `HBNB`
+
+### 2-c_route.py
+* Add route `/c/<text>` displays C followed by `text`
+
