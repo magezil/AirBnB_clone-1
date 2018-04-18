@@ -47,8 +47,14 @@ def pyprint(text="is cool"):
 
 @app.route('/number/<n>', strict_slashes=False)
 def nprint(n):
-    if type(n) is int:
+    """
+        Route /number/<n> that displays 'n is a number' if n is an integer
+    """
+    try:
+        n = int(n)
         return "{:d} is a number"
+    except ValueError:
+        pass
 
 
 if __name__ == "__main__":
