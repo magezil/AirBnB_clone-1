@@ -2,6 +2,8 @@
 """
     Script generates a .tgz archive from web_static folder
 """
+from flask import Flask
+app = Flask(__name__)
 
 
 def do_pack():
