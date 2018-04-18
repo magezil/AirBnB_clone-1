@@ -9,5 +9,9 @@
 * Add route `/hbnb` that displays `HBNB`
 
 ### 2-c_route.py
-* Add route `/c/<text>` displays C followed by `text`
+* Add route `/c/<text>` displays `C ` followed by `text`
+
+### 3-python_route.py
+* Add route `/python/<text>` that displays `Python ` followed by `text`
+* Default value of `text = "is cool"`
 

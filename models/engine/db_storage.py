@@ -47,6 +47,25 @@ class DBStorage:
                 result[key] = instance
         return result
 
+       def all(self, cls=None):
+        '''
+            Returns dictionary of all of type class
+            or all of all types if cls == None
+                key = <class-name>.<object-id>
+                value = object
+        '''
+        result = {}
+        clses = [v for k, v in models.classes.items() if "BaseModel" not in k]
+        if cls is not None:
+            if isinstance(cls, str):
+                cls = models.classes[cls]
+            clses = [cls]
+        for c in clses:
+            for instance in self.__session.query(c):
+                key = "{}.{}".format(c().__class__.__name__, instance.id)
+                result[key] = instance
+        return result 
+
     def new(self, obj):
         '''
             Add obj to current database session
