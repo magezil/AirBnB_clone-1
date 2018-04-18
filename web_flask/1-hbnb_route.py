@@ -9,7 +9,7 @@ app = Flask(__name__)
 
 
 @app.route('/', strict_slashes=False)
-def hello_world():
+def hello_hbnb():
     """
         Route / displays "Hello HBNB!"
     """
@@ -17,7 +17,7 @@ def hello_world():
 
 
 @app.route('/hbnb', strict_slashes=False)
-def hello_world():
+def hbnb():
     """
         Route /hbnb displays "HBNB!"
     """
