@@ -22,3 +22,7 @@
 * Add route /number_template/<n> to display HTML only if n is an integer
 * HTML to display: <H1>Number: `n`</H1>
 
+### 6-number_odd_or_even.py, templates/6-number_odd_or_even.html
+* Add /number_odd_or_even/<n> route displays HTML if n is an integer
+* HTML to display: <H1>Number: `n` is `even|odd`</H1>
+
