@@ -15,3 +15,6 @@
 * Add route `/python/<text>` that displays `Python ` followed by `text`
 * Default value of `text = "is cool"`
 
+### 4-number_route.py
+* Add route /number/<n> that displays 'n is a number' if n is an integer
+
