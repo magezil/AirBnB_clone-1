@@ -55,7 +55,7 @@ def nprint(n):
 
 
 @app.route('/number_template/<int:n>', strict_slashes=False)
-def nprint(n):
+def ntemplate(n):
     """
         Route /number_template/<n> that displays webpage if n is an integer
     """
