@@ -52,7 +52,7 @@ def nprint(n):
     """
     try:
         n = int(n)
-        return "{:d} is a number"
+        return "{:d} is a number".format(n)
     except ValueError:
         pass
 
