@@ -18,13 +18,13 @@ def states_list():
     return render_template('7-states_list.html', states=states)
 
 
-@app.route('/states_list/<int:n>', strict_slashes=False)
+@app.route('/states_list/<n>', strict_slashes=False)
 def state_id():
     """
         Route /states/<id> to display specific state with given id
     """
     states = storage.all(classes["State"])
-    state_key = "State.{:d}".format(n)
+    state_key = "State.{}".format(n)
     if state_key in states:
         state = states[state_key]
     else:
