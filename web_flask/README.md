@@ -32,3 +32,6 @@
 ### 8-cities_by_states.py
 * Add route /cities_by_states to display webpage listing each city within each state
 
+### 9-states.py
+* Add route /states/<id> to display specific state with given id
+
