@@ -11,6 +11,7 @@
             <UL>
                 {% for city in states|attr("cities") %}
                 <LI>{{ city|attr("id") }}: <B>{{ city|attr("name") }}</B></LI>
+                {% for city in states|attr("cities") %}
             </UL>
 	    {% endfor %}
         </UL>
