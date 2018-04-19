@@ -11,10 +11,10 @@
             <UL>
                 {% for city in item|attr("cities")|sort(attribute="name") %}
                 <LI>{{ city|attr("id") }}: <B>{{ city|attr("name") }}</B></LI>
-		{% endfor %}
+                {% endfor %}
             </UL>
+        </LI>
 	    {% endfor %}
-	</LI>
         </UL>
     </BODY>
 </HTML>
