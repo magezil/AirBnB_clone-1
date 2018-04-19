@@ -40,6 +40,8 @@ class DBStorage:
         result = {}
         clses = [v for k, v in models.classes.items() if "BaseModel" not in k]
         if cls is not None:
+            if isinstance(cls, str):
+                cls = models.classes[cls]
             clses = [cls]
         for c in clses:
             for instance in self.__session.query(c):
