@@ -19,7 +19,7 @@ def states_list():
     return render_template('7-states_list.html', states=states)
 
 
-@app.route('/states_list/<n>', strict_slashes=False)
+@app.route('/states/<n>', strict_slashes=False)
 def state_id():
     """
         Route /states/<id> to display specific state with given id
