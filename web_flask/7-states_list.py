@@ -14,7 +14,7 @@ def states_list():
         Route /states_list displays HTML page with States listed alphabetically
     """
     states = storage.all(classes["State"])
-    return render_template('7-states_list.html', states=states.values())
+    return render_template('7-states_list.html', states=states)
 
 
 @app.teardown_appcontext
