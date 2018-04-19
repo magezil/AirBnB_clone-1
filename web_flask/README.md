@@ -26,3 +26,6 @@
 * Add /number_odd_or_even/<n> route displays HTML if n is an integer
 * HTML to display: <H1>Number: `n` is `even|odd`</H1>
 
+### 7-states_list.py, web_flask/templates/7-states_list.html
+* Start Flask web application with HBNB data
+
