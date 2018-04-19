@@ -20,7 +20,7 @@ def states_list():
 
 
 @app.route('/states/<n>', strict_slashes=False)
-def state_id():
+def state_id(n):
     """
         Route /states/<id> to display specific state with given id
     """
