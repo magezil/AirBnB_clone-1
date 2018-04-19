@@ -19,7 +19,7 @@ def states_list():
 
 
 @app.route('/cities_by_states', strict_slashes=False)
-def city_states():
+def cities_by_states():
     """
         Route /cities_by_states displays HTML listing each city in each state
     """
