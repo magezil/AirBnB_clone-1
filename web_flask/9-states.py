@@ -27,7 +27,10 @@ def state_id():
     state_key = "State.{:d}".format(n)
     if state_key in states:
         state = states[state_key]
+    else:
+        state = None
     return render_template('9-states.html', state=state)
+
 
 @app.route('/cities_by_states', strict_slashes=False)
 def cities_by_states():
