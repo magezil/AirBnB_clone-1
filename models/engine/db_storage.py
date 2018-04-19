@@ -74,12 +74,12 @@ class DBStorage:
             Creates all tables in database and creates session
         '''
         Base.metadata.create_all(self.__engine)
-        Session = scoped_session(sessionmaker(bind=self.__engine,
-                                 expire_on_commit=False))
-        self.__session = Session()
+        self.__session = scoped_session(sessionmaker(bind=self.__engine,
+                                        expire_on_commit=False))
 
     def close(self):
         '''
             Removes the __session attribute
         '''
-        self.__session.remove()
+        if self.__session:
+            self.__session.remove()
