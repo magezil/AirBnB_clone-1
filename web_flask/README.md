@@ -29,9 +29,11 @@
 ### 7-states_list.py, web_flask/templates/7-states_list.html
 * Start Flask web application with HBNB data
 
-### 8-cities_by_states.py
+### 8-cities_by_states.py, web_flask/templates/8-cities_by_states.html
 * Add route /cities_by_states to display webpage listing each city within each state
 
-### 9-states.py
+### 9-states.py, web_flask/templates/9-states.html
 * Add route /states/<id> to display specific state with given id
 
+### web_flask/10-hbnb_filters.py, web_flask/templates/10-hbnb_filters.html, web_flask/static/
+* Add route /hbnb_filters to display HBNB HTML page
