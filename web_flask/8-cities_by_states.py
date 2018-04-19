@@ -18,13 +18,13 @@ def states_list():
     return render_template('7-states_list.html', states=states)
 
 
-@app.route('/states_list', strict_slashes=False)
+@app.route('/cities_by_states', strict_slashes=False)
 def states_list():
     """
         Route /cities_by_states displays HTML listing each city in each state
     """
     states = storage.all(classes["State"]).values()
-    return render_template('7-states_list.html', states=states)
+    return render_template('8-cities_by_states.html', states=states)
 
 
 @app.teardown_appcontext
