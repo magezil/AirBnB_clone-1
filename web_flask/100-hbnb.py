@@ -15,7 +15,7 @@ def hbnb_filters():
     states = storage.all(classes["State"]).values()
     amenities = storage.all(classes["Amenity"]).values()
     places = storage.all(classes["Place"]).values()
-    return render_template('10-hbnb_filters.html', states=states,
+    return render_template('100-hbnb.html', states=states,
                            amenities=amenities, place=places)
 
 
