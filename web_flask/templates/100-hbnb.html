@@ -16,58 +16,48 @@
         <div class="logo"></div>
     </header>
     <div class="container">
-        <section class="filters">
-            <button type="button">Search</button>
-            <div class="locations">
-                <h3>States</h3>
-                <h4>California</h4>
-                <ul class="popover">
-                    <li>
-                        <h2>Arizona:</h2>
-                    </li>
-                    <li>
-                        <ul class="popover_list">
-                            <li>Content</li>
-                            <li>Content</li>
-                            <li>Content</li>
-                        </ul>
-                    </li>
-                    <li>
-                        <h2>California:</h2>
-                    </li>
-                    <li>
-                        <ul class="popover_list">
-                            <li>Content</li>
-                            <li>Content</li>
-                            <li>Content</li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-            <div class="amenities">
-                <h3>Amenities</h3>
-                <h4>Lorem Ipsum</h4>
-                <ul class="popover">
-                    <li>Internet</li>
-                    <li>Tv</li>
-                    <li>Free Food</li>
-                    <li>Pool</li>
-                </ul>
-            </div>
-        </section>
+	    <section class="filters">
+		<button type="button">Search</button>
+		<div class="locations">
+		    <h3>States</h3>
+		    <h4>&nbsp;</h4>
+		    <ul class="popover">
+		    {% for state in states|sort(attribute="name") %}
+			<li><h2>{{ state.name }}</h2></li>
+			<li>
+			    <ul class="popover_list">
+			    {% for city in state|attr("cities")|sort(attribute="name") %}
+			    <li>{{ city|attr("name") }}</li>
+			    {% endfor %}
+			    </ul>
+			</li>
+		    {% endfor %}
+		    </ul>
+		</div>
+		<div class="amenities">
+		    <h3>Amenities</h3>
+		    <h4>&nbsp;</h4>
+		    <ul class="popover">
+			{% for amenity in amenities|sort(attribute="name") %}
+			<li>{{ amenity|attr("name") }}</li>
+			{% endfor %}
+		    </ul>
+		</div>
+	    </section>
         <section class="places">
             <div class="places_title">
                 <h1>Places</h1>
             </div>
             <div class="articles">
                 <article>
+			{% for place in places|sort(attribute="name") %}
                     <div class="price_title">
                         <div class="article_title">
-                            <h2>My Home</h2>
+				<h2>{{ place|attr("name") }}</h2>
                         </div>
                         <div class="price_by_night">
                             <div class="price">
-                                $60
+				    {{ place|attr("price_by_night")  }} 
                             </div>
                         </div>
                     </div>
@@ -76,128 +66,31 @@
                             <div class="guest_icon">
                             </div>
                             <div class="guest_number">
-                                <h2>2 Guests</h2>
+				    <h2>{{ place|attr("max_guest") }} Guests</h2>
                             </div>
                         </div>
                         <div class="number_rooms">
                             <div class="rooms_icon">
                             </div>
                             <div class="rooms_number">
-                                <h2>1 Bedroom</h2>
+				    <h2>{{ place|attr("number_rooms") }} Bedroom</h2>
                             </div>
                         </div>
                         <div class="number_bathrooms">
                             <div class="bathrooms_icon">
                             </div>
                             <div class="bathrooms_number">
-                                <h2>1 Bathroom</h2>
+                                <h2>{{ place|attr("number_bathrooms") }} Bathroom</h2>
                             </div>
                         </div>
                     </div>
                     <div class="user">
-                        <b>Owner:</b> Grace Hopper
+			    <b>Owner:</b> {{ place|attr("user_id") }}
                     </div>
                     <div class="description">
-                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy
-                        text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make
-                        a type specimen book. It has survived not only five centuries, but also the leap into electronic
-                        typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of
-                        Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software
-                        like Aldus PageMaker including versions of Lorem Ipsum.
+			    {{ place|attr("description") }}
                     </div>
-                </article>
-                <article>
-                    <div class="price_title">
-                        <div class="article_title">
-                            <h2>My Home</h2>
-                        </div>
-                        <div class="price_by_night">
-                            <div class="price">
-                                $60
-                            </div>
-                        </div>
-                    </div>
-                    <div class="information">
-                        <div class="max_guest">
-                            <div class="guest_icon">
-                            </div>
-                            <div class="guest_number">
-                                <h2>2 Guests</h2>
-                            </div>
-                        </div>
-                        <div class="number_rooms">
-                            <div class="rooms_icon">
-                            </div>
-                            <div class="rooms_number">
-                                <h2>1 Bedroom</h2>
-                            </div>
-                        </div>
-                        <div class="number_bathrooms">
-                            <div class="bathrooms_icon">
-                            </div>
-                            <div class="bathrooms_number">
-                                <h2>1 Bathroom</h2>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="user">
-                        <b>Owner:</b> Grace Hopper
-                    </div>
-                    <div class="description">
-                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy
-                        text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make
-                        a type specimen book. It has survived not only five centuries, but also the leap into electronic
-                        typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of
-                        Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software
-                        like Aldus PageMaker including versions of Lorem Ipsum.
-
-                    </div>
-                </article>
-                <article>
-                    <div class="price_title">
-                        <div class="article_title">
-                            <h2>My Home</h2>
-                        </div>
-                        <div class="price_by_night">
-                            <div class="price">
-                                $60
-                            </div>
-                        </div>
-                    </div>
-                    <div class="information">
-                        <div class="max_guest">
-                            <div class="guest_icon">
-                            </div>
-                            <div class="guest_number">
-                                <h2>2 Guests</h2>
-                            </div>
-                        </div>
-                        <div class="number_rooms">
-                            <div class="rooms_icon">
-                            </div>
-                            <div class="rooms_number">
-                                <h2>1 Bedroom</h2>
-                            </div>
-                        </div>
-                        <div class="number_bathrooms">
-                            <div class="bathrooms_icon">
-                            </div>
-                            <div class="bathrooms_number">
-                                <h2>1 Bathroom</h2>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="user">
-                        <b>Owner:</b> Grace Hopper
-                    </div>
-                    <div class="description">
-                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy
-                        text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make
-                        a type specimen book. It has survived not only five centuries, but also the leap into electronic
-                        typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of
-                        Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software
-                        like Aldus PageMaker including versions of Lorem Ipsum.
-                    </div>
+		    {% endfor %}
                 </article>
             </div>
         </section>

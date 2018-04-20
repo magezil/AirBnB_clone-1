@@ -15,7 +15,9 @@ def hbnb_filters():
     """
     states = storage.all(classes["State"]).values()
     amenities = storage.all(classes["Amenity"]).values()
-    return render_template('10-hbnb_filters.html', states=states, amenities=amenities)
+    return render_template('10-hbnb_filters.html', states=states,
+                           amenities=amenities)
+
 
 @app.teardown_appcontext
 def teardown_db(exception):

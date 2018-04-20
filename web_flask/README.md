@@ -37,3 +37,6 @@
 
 ### web_flask/10-hbnb_filters.py, web_flask/templates/10-hbnb_filters.html, web_flask/static/
 * Add route /hbnb_filters to display HBNB HTML page
+
+### web_flask/10-hbnb_filters.py, web_flask/templates/10-hbnb_filters.html, web_flask/static/
+* Add route /hbnb to display HBNB HTML page
