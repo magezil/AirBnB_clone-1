@@ -49,61 +49,20 @@
                 <h1>Places</h1>
             </div>
             <div class="articles">
+		{% for place in places|sort(attribute="name") %}
 		<article>
                         <div class="result_head">
-                        <h2>My home</h2>
-                        <div class="price_by_night"><p>$80</p></div>
+			<h2>{{ place|attr("name") }}</h2>
+			<div class="price_by_night">{{ place|attr("price_by_night")  }}</div>
+
                         </div>
                         <div class="information">
-                                <div class="max_guest"><p>2 Guests</p></div>
-                                <div class="number_rooms"><p>1 Bedroom</p></div>
-                                <div class="number_bathrooms"><p>1 Bathroom</p></div>
+                                <div class="max_guest"><p>{{ place|attr("max_guest") }} Guests</p></div>
+                                <div class="number_rooms"><p>{{ place|attr("number_rooms") }} Bedroom</p></div>
+                                <div class="number_bathrooms"><p>{{ place|attr("number_bathrooms") }} Bathroom</p></div>
                         </div>
-                        <div class="user"><p><b>Owner:</b> John Lennon</p></div>
-                        <div class="description"><p>This is a lovely 1 bedroom, 1 bathroom apartment that can accomodate 2 people. It is located at the center of Palo Alto and is walking distance from the Palo Alto Transit Center with easy access to many places in the Bay Area.</p></div>
-                </article>
-		{% for place in places|sort(attribute="name") %}
-                <article>
-			<p>TEST</p>
-                    <div class="price_title">
-                        <div class="article_title">
-				<h2>{{ place|attr("name") }}</h2>
-                        </div>
-                        <div class="price_by_night">
-                            <div class="price">
-				    {{ place|attr("price_by_night")  }} 
-                            </div>
-                        </div>
-                    </div>
-                    <div class="information">
-                        <div class="max_guest">
-                            <div class="guest_icon">
-                            </div>
-                            <div class="guest_number">
-				    <h2>{{ place|attr("max_guest") }} Guests</h2>
-                            </div>
-                        </div>
-                        <div class="number_rooms">
-                            <div class="rooms_icon">
-                            </div>
-                            <div class="rooms_number">
-				    <h2>{{ place|attr("number_rooms") }} Bedroom</h2>
-                            </div>
-                        </div>
-                        <div class="number_bathrooms">
-                            <div class="bathrooms_icon">
-                            </div>
-                            <div class="bathrooms_number">
-                                <h2>{{ place|attr("number_bathrooms") }} Bathroom</h2>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="user">
-			    <b>Owner:</b> {{ place|attr("user_id") }}
-                    </div>
-                    <div class="description">
-			    {{ place|attr("description") }}
-                    </div>
+                        <div class="user"><p><b>Owner:</b> {{ place|attr("user_id") }}</p></div>
+                        <div class="description"><p>{{ place|attr("description") }}</p></div>
                 </article>
 	        {% endfor %}
             </div>
