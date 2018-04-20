@@ -49,8 +49,9 @@
                 <h1>Places</h1>
             </div>
             <div class="articles">
+		{% for place in places|sort(attribute="name") %}
                 <article>
-			{% for place in places|sort(attribute="name") %}
+			<p>TEST</p>
                     <div class="price_title">
                         <div class="article_title">
 				<h2>{{ place|attr("name") }}</h2>
@@ -90,8 +91,8 @@
                     <div class="description">
 			    {{ place|attr("description") }}
                     </div>
-		    {% endfor %}
                 </article>
+	        {% endfor %}
             </div>
         </section>
     </div>
