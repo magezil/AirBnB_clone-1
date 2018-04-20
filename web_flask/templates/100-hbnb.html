@@ -49,6 +49,19 @@
                 <h1>Places</h1>
             </div>
             <div class="articles">
+		<article>
+                        <div class="result_head">
+                        <h2>My home</h2>
+                        <div class="price_by_night"><p>$80</p></div>
+                        </div>
+                        <div class="information">
+                                <div class="max_guest"><p>2 Guests</p></div>
+                                <div class="number_rooms"><p>1 Bedroom</p></div>
+                                <div class="number_bathrooms"><p>1 Bathroom</p></div>
+                        </div>
+                        <div class="user"><p><b>Owner:</b> John Lennon</p></div>
+                        <div class="description"><p>This is a lovely 1 bedroom, 1 bathroom apartment that can accomodate 2 people. It is located at the center of Palo Alto and is walking distance from the Palo Alto Transit Center with easy access to many places in the Bay Area.</p></div>
+                </article>
 		{% for place in places|sort(attribute="name") %}
                 <article>
 			<p>TEST</p>
